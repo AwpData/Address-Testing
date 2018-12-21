@@ -12,6 +12,7 @@ public class newAddress {
 	private Birthday birthday;
 	private static int entries = 0;
 	private int TempRecord;
+	private String date; // makes each address have a unique date
 
 	public newAddress() {
 		this.name = setName();
@@ -20,12 +21,13 @@ public class newAddress {
 		this.state = setState();
 		this.zipcode = setZipCode();
 		this.birthday = new Birthday();
+		this.date = setDateTime();
 		entries++;
 		this.TempRecord = entries;
 	}
 
 	public newAddress(String name, String address, String city, String state, String zipcode, Birthday birthday,
-			int TempRecord) { // Test Method
+			int TempRecord, String date) {
 		this.name = name;
 		this.address = address;
 		this.city = city;
@@ -34,14 +36,15 @@ public class newAddress {
 		this.birthday = birthday;
 		entries++;
 		this.TempRecord = entries;
+		this.date = date;
 	}
 
 	public static int getEntries() {
 		return entries;
 	}
 
-	private String getDateTime() {
-		DateFormat dateFormat = new SimpleDateFormat("HH:mm MM/dd/yyyy");
+	private String setDateTime() {
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss MM/dd/yyyy");
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
@@ -77,13 +80,13 @@ public class newAddress {
 	}
 
 	public String toString() { // Test Method
-		return String.format(getDateTime() + "\nEntry %s:\n\n%s\n%s\n%s, %s %s\nBirthday: %s\n\n", TempRecord, name,
-				address, city, state, zipcode, birthday);
+		return String.format("%s\nEntry %s:\n\n%s\n%s\n%s, %s %s\nBirthday: %s\n\n", date, TempRecord, name, address,
+				city, state, zipcode, birthday);
 	}
 
 	public void printFullAddress() {
-		System.out.printf(getDateTime() + "\nEntry %s:\n%s\n%s\n%s, %s %s\nBirthday: %s\n\n", TempRecord, name,
-				address, city, state, zipcode, birthday);
+		System.out.printf("%s\nEntry %s:\n%s\n%s\n%s, %s %s\nBirthday: %s\n\n", date, TempRecord, name, address, city,
+				state, zipcode, birthday);
 	}
 
 	public String getInput() {
